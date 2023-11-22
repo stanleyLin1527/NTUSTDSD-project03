@@ -1,0 +1,19 @@
+.start_kiss
+.i 1
+.o 1
+.p 12
+.s 6
+.r meet
+0 know meet 0
+1 know dating 1
+0 meet meet 0
+1 meet know 0
+0 dating know 0
+1 dating seeing 0
+0 seeing dating 0
+1 seeing beTogether 1
+0 breakUp know 0
+1 breakUp know 0
+0 beTogether breakUp 1
+1 beTogether breakUp 1
+.end_kiss

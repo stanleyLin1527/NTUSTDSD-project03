@@ -1,0 +1,22 @@
+digraph STG {
+	rankdir=LR;
+
+	INIT [shape=point];
+	up [label="up"];
+	give [label="give"];
+	never [label="never"];
+
+	INIT -> never
+	up -> give [label="00/1"];
+	up -> give [label="01/1"];
+	up -> up [label="10/1"];
+	up -> up [label="11/1"];
+	give -> give [label="00/0"];
+	give -> give [label="01/1"];
+	give -> up [label="10/1"];
+	give -> up [label="11/0"];
+	never -> give [label="00/0"];
+	never -> give [label="01/0"];
+	never -> up [label="10/0"];
+	never -> up [label="11/0"];
+}

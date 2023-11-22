@@ -1,0 +1,19 @@
+.start_kiss
+.i 1
+.o 1
+.p 12
+.s 6
+.r a
+0 a b 0
+1 a c 1
+0 b a 1
+1 b e 0
+0 c d 0
+1 c a 1
+0 d c 1
+1 d e 0
+0 e a 1
+1 e f 0
+0 f e 0
+1 f f 1
+.end_kiss

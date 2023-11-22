@@ -1,0 +1,25 @@
+digraph STG {
+	rankdir=LR;
+
+	INIT [shape=point];
+	know [label="know"];
+	meet [label="meet"];
+	dating [label="dating"];
+	seeing [label="seeing"];
+	breakUp [label="breakUp"];
+	beTogether [label="beTogether"];
+
+	INIT -> meet
+	know -> meet [label="0/0"];
+	know -> dating [label="1/1"];
+	meet -> meet [label="0/0"];
+	meet -> know [label="1/0"];
+	dating -> know [label="0/0"];
+	dating -> seeing [label="1/0"];
+	seeing -> dating [label="0/0"];
+	seeing -> beTogether [label="1/1"];
+	breakUp -> know [label="0/0"];
+	breakUp -> know [label="1/0"];
+	beTogether -> breakUp [label="0/1"];
+	beTogether -> breakUp [label="1/1"];
+}

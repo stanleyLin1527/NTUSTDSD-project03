@@ -1,0 +1,32 @@
+digraph STG {
+	rankdir=LR;
+
+	INIT [shape=point];
+	up [label="up"];
+	you [label="you"];
+	give [label="give"];
+	gonna [label="gonna"];
+	never [label="never"];
+
+	INIT -> never
+	up -> gonna [label="00/1"];
+	up -> give [label="01/1"];
+	up -> you [label="10/1"];
+	up -> up [label="11/1"];
+	you -> gonna [label="00/1"];
+	you -> give [label="01/1"];
+	you -> you [label="10/1"];
+	you -> up [label="11/1"];
+	give -> gonna [label="00/0"];
+	give -> give [label="01/1"];
+	give -> you [label="10/1"];
+	give -> up [label="11/0"];
+	gonna -> gonna [label="00/0"];
+	gonna -> give [label="01/1"];
+	gonna -> you [label="10/1"];
+	gonna -> up [label="11/0"];
+	never -> gonna [label="00/0"];
+	never -> give [label="01/0"];
+	never -> you [label="10/0"];
+	never -> up [label="11/0"];
+}

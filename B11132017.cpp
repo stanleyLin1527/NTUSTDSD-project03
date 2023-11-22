@@ -81,9 +81,9 @@ void preprocessing(map<string, map<string, Outcome>, myCompare> FSM_table, vecto
 
 void find_compatibility(vector<vector<implications>> &implication_table, vector<string> &states);
 
-void merge(map<string, map<string, Outcome>, myCompare> &FSM_table, vector<vector<implications>> &implication_table, vector<string> &states, vector<string> &input_seq);
+void merge(string &init_state, map<string, map<string, Outcome>, myCompare> &FSM_table, vector<vector<implications>> &implication_table, vector<string> &states, vector<string> &input_seq);
 
-void simplify(vector<string> &states, vector<string> &input_seq, map<string, map<string, Outcome>, myCompare> &FSM_table);
+void simplify(string &init_state, vector<string> &states, vector<string> &input_seq, map<string, map<string, Outcome>, myCompare> &FSM_table);
 
 int main(int argc, char **argv)
 {
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
     map<string, map<string, Outcome>, myCompare> FSM_table;
     read_file(in_file, in_bits, out_bits, in_relations, in_states, init_state, states, input_seq, FSM_table);
     write_dot(input_dot, init_state, states, input_seq, FSM_table); // bonus: the not simplified dot file
-    simplify(states, input_seq, FSM_table);
+    simplify(init_state, states, input_seq, FSM_table);
     write_kiss(out_kiss, in_bits, out_bits, init_state, states, input_seq, FSM_table); // simplified kiss
     write_dot(out_dot, init_state, states, input_seq, FSM_table);                      // simplified dot
     return 0;
@@ -341,7 +341,7 @@ void find_compatibility(vector<vector<implications>> &implication_table, vector<
     }
 }
 
-void merge(map<string, map<string, Outcome>, myCompare> &FSM_table, vector<vector<implications>> &implication_table,
+void merge(string &init_state, map<string, map<string, Outcome>, myCompare> &FSM_table, vector<vector<implications>> &implication_table,
            vector<string> &states, vector<string> &input_seq)
 {
     vector<string> to_delete_states;
@@ -356,6 +356,11 @@ void merge(map<string, map<string, Outcome>, myCompare> &FSM_table, vector<vecto
                 {
                     have_change = true;
                     to_delete_states.push_back(states[row]);
+
+                    // if init state will be deleted, change it into appropriate state
+                    if (init_state == states[row])
+                        init_state = states[col];
+
                     // update FSM table: replace [row state] with [col state] in all the Outcome field because [row state] will be deleted
                     for (const string &state : states)
                     {
@@ -403,10 +408,10 @@ void merge(map<string, map<string, Outcome>, myCompare> &FSM_table, vector<vecto
     }
 }
 
-void simplify(vector<string> &states, vector<string> &input_seq, map<string, map<string, Outcome>, myCompare> &FSM_table)
+void simplify(string &init_state, vector<string> &states, vector<string> &input_seq, map<string, map<string, Outcome>, myCompare> &FSM_table)
 {
     vector<vector<implications>> implication_table(states.size(), vector<implications>(states.size()));
     preprocessing(FSM_table, implication_table, states, input_seq);
     find_compatibility(implication_table, states);
-    merge(FSM_table, implication_table, states, input_seq);
+    merge(init_state, FSM_table, implication_table, states, input_seq);
 }

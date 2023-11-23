@@ -19,6 +19,6 @@ g++ Source_Code.cpp
 To get unsimplified dot file, simplified kiss file, and simplified dot file: 
 ./Program_Name kiss_in_file dot_in_file kiss_out_file dot_out_file
 
-To draw the graph of the unsimplified kiss file: dot -T png dot_in_file > before_result.png
+To draw the graph of the unsimplified kiss file: dot -T png dot_in_file > before_minimization.png
 
-To draw the graph of the simplified kiss file: dot -T png dot_out_file > after_result.png
+To draw the graph of the simplified kiss file: dot -T png dot_out_file > after_minimization.png

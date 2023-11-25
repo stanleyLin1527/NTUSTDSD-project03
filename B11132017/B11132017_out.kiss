@@ -1,0 +1,19 @@
+.start_kiss
+.i 2
+.o 1
+.p 12
+.s 3
+.r never
+00 up give 1
+01 up give 1
+10 up up 1
+11 up up 1
+00 give give 0
+01 give give 1
+10 give up 1
+11 give up 0
+00 never give 0
+01 never give 0
+10 never up 0
+11 never up 0
+.end_kiss
